@@ -2,7 +2,7 @@
 
 Mapa-múndi e painel da coleção de camisas de futebol de Daniele Mureddu (663 camisas, 156 países).
 
-Site: https://www.garrinchashirts.com
+Site: https://garrinchashirts.com
 
 ## O que tem
 - **Mapa**: cada país pintado pela quantidade de camisas; clique para ver as camisas do país.
@@ -23,4 +23,4 @@ python3 -m http.server 8000
 Abra http://localhost:8000.
 
 ## Publicação
-GitHub Pages, branch `main`, pasta raiz. O arquivo `CNAME` aponta o domínio `www.garrinchashirts.com`.
+GitHub Pages, branch `main`, pasta raiz. O arquivo `CNAME` aponta o domínio `garrinchashirts.com`.
