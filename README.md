@@ -1,6 +1,6 @@
 # ShirtVault
 
-Mapa-múndi e painel da coleção de camisas de futebol de Daniele Mureddu (663 camisas, 156 países).
+Mapa-múndi e painel de coleções de camisas de futebol: Daniele Mureddu (663 camisas) e Roberto Baigorria (5.931 camisas).
 
 Site: https://garrinchashirts.com/colecao (embutido) · https://guigalhano.github.io/shirtvault/
 
@@ -12,7 +12,8 @@ Site: https://garrinchashirts.com/colecao (embutido) · https://guigalhano.githu
 
 ## Estrutura
 - `index.html`: o app inteiro (HTML, CSS e JavaScript, sem build).
-- `data/daniele.json`: a coleção, convertida da planilha `Collezione_Maglie_2026_Stats.xlsx`.
+- `data/daniele.json`: coleção de Daniele Mureddu (663 camisas), da planilha `Collezione_Maglie_2026_Stats.xlsx`.
+- `data/roberto.json`: coleção de Roberto Baigorria (5.931 camisas), da planilha `colección camis (Autoguardado).xlsx`. O país vem da coluna "País", que mistura países e ligas.
 - `data/countries.json`: nomes dos países em 4 idiomas e códigos ISO.
 - `data/world.json`: geometria do mapa ([world-atlas](https://github.com/topojson/world-atlas), Natural Earth, domínio público).
 
