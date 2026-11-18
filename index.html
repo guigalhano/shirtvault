@@ -153,6 +153,15 @@ dialog::backdrop{background:rgb(10 12 25/.55)}
 .rank .pos{color:var(--muted);font-variant-numeric:tabular-nums}
 .rank .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rank .ct{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px;gap:2px;margin-bottom:14px;flex-wrap:wrap}
+.segb{border:0;background:transparent;border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:600;color:var(--muted)}
+.segb[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0/.12)}
+.mapleft{display:grid;gap:16px;min-width:0}
+.cfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cfcard{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left}
+.cfcard:hover{border-color:var(--accent)}
+.cfcard .cfn{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.cfcard .cfc{font-family:var(--display);font-size:24px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:4px 6px 4px 12px;font-weight:600;font-size:13px}
 .chip button{all:unset;cursor:pointer;width:20px;height:20px;border-radius:50%;display:grid;place-items:center}
 .chip button:hover{background:var(--accent);color:var(--accent-ink)}
@@ -193,7 +202,7 @@ dialog::backdrop{background:rgb(10 12 25/.55)}
 <script>
 /* ---------- i18n ---------- */
 const I18N={
-pt:{nav_map:"Mapa",map_t:"Mapa da coleção",map_p:"Cada país pintado pela quantidade de camisas. Clique para ver as camisas daquele país.",m_countries:"países com camisa",m_top:"Países com mais camisas",m_cont:"Continentes",m_unmapped:"Sem país no mapa",m_none:"nenhuma",m_few:"menos",m_many:"mais",f_country:"País",nav_dash:"Painel",nav_coll:"Coleção",nav_explore:"Explorar",nav_new:"Nova camisa",lang:"Idioma",
+pt:{k_all:"Todos",k_nat:"Seleções nacionais",k_clubs2:"Times",cf_t:"CONIFA",cf_p:"Seleções e territórios fora da FIFA, membros da CONIFA. Clique para ver as camisas.",cf_none:"Nenhuma camisa CONIFA com este filtro.",nav_map:"Mapa",map_t:"Mapa da coleção",map_p:"Cada país pintado pela quantidade de camisas. Clique para ver as camisas daquele país.",m_countries:"países com camisa",m_top:"Países com mais camisas",m_cont:"Continentes",m_unmapped:"Sem país no mapa",m_none:"nenhuma",m_few:"menos",m_many:"mais",f_country:"País",nav_dash:"Painel",nav_coll:"Coleção",nav_explore:"Explorar",nav_new:"Nova camisa",lang:"Idioma",
  collector_of:"Coleção de",demo:"Importada de planilha",yours:"Sua coleção",
  k_total:"Camisas",k_countries:"Países",k_clubs:"Times",k_suppliers:"Fornecedores",k_mw:"Match worn",k_coa:"Com certificado",
  c_cont:"Por continente",c_style:"Por estilo",c_supp:"Top fornecedores",c_clubs:"Top times",c_decade:"Por década da temporada",c_size:"Por tamanho",c_cond:"Por condição",c_place:"Onde comprou",
@@ -211,7 +220,7 @@ pt:{nav_map:"Mapa",map_t:"Mapa da coleção",map_p:"Cada país pintado pela quan
  loading:"Carregando…",slow:"Os dados ainda não responderam. Verifique a conexão.",nores:"Nenhuma camisa com esses filtros.",
  empty_you:"Você ainda não cadastrou camisas.",add_first:"Cadastrar a primeira",
  cont:{"Europa":"Europa","Sud America":"América do Sul","Africa":"África","Asia":"Ásia","Centro America":"América Central","Oceania":"Oceania","America del Nord":"América do Norte"}},
-en:{nav_map:"Map",map_t:"Collection map",map_p:"Each country shaded by how many shirts it has. Click one to see its shirts.",m_countries:"countries with shirts",m_top:"Countries with the most shirts",m_cont:"Continents",m_unmapped:"Not on the map",m_none:"none",m_few:"fewer",m_many:"more",f_country:"Country",nav_dash:"Dashboard",nav_coll:"Collection",nav_explore:"Explore",nav_new:"New shirt",lang:"Language",
+en:{k_all:"All",k_nat:"National teams",k_clubs2:"Clubs",cf_t:"CONIFA",cf_p:"Teams and territories outside FIFA that belong to CONIFA. Click to see the shirts.",cf_none:"No CONIFA shirts with this filter.",nav_map:"Map",map_t:"Collection map",map_p:"Each country shaded by how many shirts it has. Click one to see its shirts.",m_countries:"countries with shirts",m_top:"Countries with the most shirts",m_cont:"Continents",m_unmapped:"Not on the map",m_none:"none",m_few:"fewer",m_many:"more",f_country:"Country",nav_dash:"Dashboard",nav_coll:"Collection",nav_explore:"Explore",nav_new:"New shirt",lang:"Language",
  collector_of:"Collection of",demo:"Imported from spreadsheet",yours:"Your collection",
  k_total:"Shirts",k_countries:"Countries",k_clubs:"Teams",k_suppliers:"Suppliers",k_mw:"Match worn",k_coa:"With certificate",
  c_cont:"By continent",c_style:"By style",c_supp:"Top suppliers",c_clubs:"Top teams",c_decade:"By season decade",c_size:"By size",c_cond:"By condition",c_place:"Where bought",
@@ -229,7 +238,7 @@ en:{nav_map:"Map",map_t:"Collection map",map_p:"Each country shaded by how many 
  loading:"Loading…",slow:"The data hasn't answered yet. Check your connection.",nores:"No shirts match these filters.",
  empty_you:"You haven't added any shirts yet.",add_first:"Add the first one",
  cont:{"Europa":"Europe","Sud America":"South America","Africa":"Africa","Asia":"Asia","Centro America":"Central America","Oceania":"Oceania","America del Nord":"North America"}},
-es:{nav_map:"Mapa",map_t:"Mapa de la colección",map_p:"Cada país coloreado según la cantidad de camisetas. Haz clic para ver las camisetas de ese país.",m_countries:"países con camiseta",m_top:"Países con más camisetas",m_cont:"Continentes",m_unmapped:"Sin país en el mapa",m_none:"ninguna",m_few:"menos",m_many:"más",f_country:"País",nav_dash:"Panel",nav_coll:"Colección",nav_explore:"Explorar",nav_new:"Nueva camiseta",lang:"Idioma",
+es:{k_all:"Todos",k_nat:"Selecciones nacionales",k_clubs2:"Equipos",cf_t:"CONIFA",cf_p:"Selecciones y territorios fuera de la FIFA, miembros de la CONIFA. Haz clic para ver las camisetas.",cf_none:"Ninguna camiseta CONIFA con este filtro.",nav_map:"Mapa",map_t:"Mapa de la colección",map_p:"Cada país coloreado según la cantidad de camisetas. Haz clic para ver las camisetas de ese país.",m_countries:"países con camiseta",m_top:"Países con más camisetas",m_cont:"Continentes",m_unmapped:"Sin país en el mapa",m_none:"ninguna",m_few:"menos",m_many:"más",f_country:"País",nav_dash:"Panel",nav_coll:"Colección",nav_explore:"Explorar",nav_new:"Nueva camiseta",lang:"Idioma",
  collector_of:"Colección de",demo:"Importada de planilla",yours:"Tu colección",
  k_total:"Camisetas",k_countries:"Países",k_clubs:"Equipos",k_suppliers:"Marcas",k_mw:"Match worn",k_coa:"Con certificado",
  c_cont:"Por continente",c_style:"Por estilo",c_supp:"Marcas principales",c_clubs:"Equipos principales",c_decade:"Por década de la temporada",c_size:"Por talla",c_cond:"Por condición",c_place:"Dónde se compró",
@@ -247,7 +256,7 @@ es:{nav_map:"Mapa",map_t:"Mapa de la colección",map_p:"Cada país coloreado seg
  loading:"Cargando…",slow:"Los datos aún no responden. Revisa tu conexión.",nores:"Ninguna camiseta coincide con los filtros.",
  empty_you:"Aún no registraste camisetas.",add_first:"Registrar la primera",
  cont:{"Europa":"Europa","Sud America":"Sudamérica","Africa":"África","Asia":"Asia","Centro America":"Centroamérica","Oceania":"Oceanía","America del Nord":"Norteamérica"}},
-it:{nav_map:"Mappa",map_t:"Mappa della collezione",map_p:"Ogni nazione colorata in base al numero di maglie. Clicca per vedere le maglie di quella nazione.",m_countries:"nazioni con maglie",m_top:"Nazioni con più maglie",m_cont:"Continenti",m_unmapped:"Fuori dalla mappa",m_none:"nessuna",m_few:"meno",m_many:"più",f_country:"Nazione",nav_dash:"Dashboard",nav_coll:"Collezione",nav_explore:"Esplora",nav_new:"Nuova maglia",lang:"Lingua",
+it:{k_all:"Tutte",k_nat:"Nazionali",k_clubs2:"Club",cf_t:"CONIFA",cf_p:"Nazionali e territori fuori dalla FIFA, membri della CONIFA. Clicca per vedere le maglie.",cf_none:"Nessuna maglia CONIFA con questo filtro.",nav_map:"Mappa",map_t:"Mappa della collezione",map_p:"Ogni nazione colorata in base al numero di maglie. Clicca per vedere le maglie di quella nazione.",m_countries:"nazioni con maglie",m_top:"Nazioni con più maglie",m_cont:"Continenti",m_unmapped:"Fuori dalla mappa",m_none:"nessuna",m_few:"meno",m_many:"più",f_country:"Nazione",nav_dash:"Dashboard",nav_coll:"Collezione",nav_explore:"Esplora",nav_new:"Nuova maglia",lang:"Lingua",
  collector_of:"Collezione di",demo:"Importata da foglio",yours:"La tua collezione",
  k_total:"Maglie",k_countries:"Nazioni",k_clubs:"Squadre",k_suppliers:"Sponsor tecnici",k_mw:"Match worn",k_coa:"Con certificato",
  c_cont:"Per continente",c_style:"Per versione",c_supp:"Top sponsor tecnici",c_clubs:"Top squadre",c_decade:"Per decennio della stagione",c_size:"Per taglia",c_cond:"Per condizione",c_place:"Luogo d'acquisto",
@@ -296,7 +305,7 @@ function hyFeatures(sh){if(sh.features)return sh.features;const f=[];if(sh.cond=
 
 /* ---------- state ---------- */
 const STATIC=[{id:"demo",name:"Daniele Mureddu",file:"data/daniele.json",country:"Italia"},{id:"roberto",name:"Roberto Baigorria",file:"data/roberto.json",country:"Chile"}];
-const S={demo:[],st:{},collectors:{},mine:[],me:null,db:null,user:null,view:"painel",who:"demo",filters:{q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:""},mode:"grid",limit:60,dbState:"loading",shirtsOf:{}};
+const S={demo:[],st:{},collectors:{},mine:[],me:null,db:null,user:null,view:"painel",who:"demo",filters:{q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:"",cf:""},mode:"grid",mapKind:"all",limit:60,dbState:"loading",shirtsOf:{}};
 try{S.mode=localStorage.getItem("sv_mode")||"grid"}catch(e){}
 
 function normDemo(r,i){return{id:"d"+r.n,club:r.club,country:r.country,cont:r.cont,season:r.season,tier:r.tier,kind:r.kind,supplier:r.supplier,size:r.size,style:r.style,cond:r.cond,note:r.note,coa:r.coa,num:r.num,player:r.player,bought:r.bought}}
@@ -352,20 +361,44 @@ function viewDash(){
 }
 
 let GEO=null;
+const CONIFA={
+ sardinia:{n:{pt:"Sardenha",en:"Sardinia",es:"Cerdeña",it:"Sardegna"},a:["sardegna","cerdegna","cerdena","sardinia","sardenha"]},
+ catalonia:{n:{pt:"Catalunha",en:"Catalonia",es:"Cataluña",it:"Catalogna"},a:["catalunya","cataluna","catalonia","catalogna"]},
+ kurdistan:{n:{pt:"Curdistão",en:"Kurdistan",es:"Kurdistán",it:"Kurdistan"},a:["kurdistan"]},
+ basque:{n:{pt:"País Basco",en:"Basque Country",es:"País Vasco",it:"Paesi Baschi"},a:["paesi baschi","pais vasco","euskadi","basque"]},
+ easter:{n:{pt:"Ilha de Páscoa",en:"Easter Island",es:"Isla de Pascua",it:"Isola di Pasqua"},a:["easter island","isla de pascua","rapa nui"]},
+ ncyprus:{n:{pt:"Chipre do Norte",en:"Northern Cyprus",es:"Chipre del Norte",it:"Cipro del Nord"},a:["cipro nord","chipre del norte","northern cyprus","n. cyprus"]},
+ seborga:{n:{pt:"Seborga",en:"Seborga",es:"Seborga",it:"Seborga"},a:["seborga"]},
+ chagos:{n:{pt:"Ilhas Chagos",en:"Chagos Islands",es:"Islas Chagos",it:"Isole Chagos"},a:["chagos"]}
+};
+function conifaKey(x){
+  if(x._cf!==undefined)return x._cf;
+  let k="";
+  const hay=normC([x.country==="CONIFA"?x.club:"",x.league,x.kind==="Nazionale"||x.country==="CONIFA"?x.club:""].join(" | "));
+  if(x.country==="CONIFA"||!ckey(x.country))for(const [id,c] of Object.entries(CONIFA))if(c.a.some(a=>hay.includes(a))){k=id;break}
+  try{Object.defineProperty(x,"_cf",{value:k,enumerable:false})}catch(e){}
+  return k;
+}
+const cfName=k=>(CONIFA[k]&&CONIFA[k].n[lang])||k;
+function byKind(L,mk){return mk==="nat"?L.filter(x=>x.kind==="Nazionale"):mk==="club"?L.filter(x=>x.kind!=="Nazionale"):L}
 function viewMap(){
-  const L=shirtsFor(S.who);
+  const L=byKind(shirtsFor(S.who),S.mapKind);
   const by=new Map(),sub=new Map();let unm=0;
   for(const x of L){const k=ckey(x.country);if(!k){if(x.country)unm++;continue}const m=mapKey(k);by.set(m,(by.get(m)||0)+1);if(m!==k){const o=sub.get(m)||new Map();o.set(k,(o.get(k)||0)+1);sub.set(m,o)}}
   const max=Math.max(1,...by.values());
   const lvl=v=>!v?0:v<2?1:v<4?2:v<10?3:v<30?4:5;
   const ranked=countBy(L,x=>{const k=ckey(x.country);return k||null});
   const conts=countBy(L,x=>x.cont);
+  const cf=countBy(L,x=>conifaKey(x)||null);
   S._mapInfo={by,sub};
   const svg=GEO?`<svg viewBox="0 0 960 500" role="img" aria-label="${esc(t("map_t"))}"><rect class="sea" x="0" y="0" width="960" height="500" rx="8"/>${GEO.map(g=>{const v=by.get(g.k)||0;return `<path class="c${v?" l"+lvl(v):""}" d="${g.d}"${v?` data-k="${esc(g.k)}"`:""}></path>`}).join("")}</svg>`:`<div class="empty">${esc(t("loading"))}</div>`;
+  const seg=[["all","k_all"],["nat","k_nat"],["club","k_clubs2"]].map(([v,l])=>`<button class="segb" data-mk="${v}" aria-pressed="${S.mapKind===v}">${esc(t(l))}</button>`).join("");
+  const cfpanel=`<section class="panel cfp"><h2>${esc(t("cf_t"))}</h2><p class="sub" style="margin:-6px 0 12px">${esc(t("cf_p"))}</p>${cf.length?`<div class="cfgrid">${cf.map(([k,v])=>`<button class="cfcard" data-cf="${esc(k)}"><span class="cfn">${esc(cfName(k))}</span><span class="cfc">${v}</span></button>`).join("")}</div>`:`<p class="sub">${esc(t("cf_none"))}</p>`}</section>`;
   return ownerHead(S.who,t("map_t"))+
-  `<div class="mapgrid"><div class="mapbox" id="mapbox">${svg}
+  `<div class="seg" role="group" aria-label="${esc(t("f_kind"))}">${seg}</div>
+  <div class="mapgrid"><div class="mapleft"><div class="mapbox" id="mapbox">${svg}
     <div class="legend">${[1,2,3,4,5].map(i=>`<i style="background:${i===5?"var(--accent)":`color-mix(in srgb,var(--accent) ${[0,22,42,62,82][i]}%,var(--land))`}"></i><span>${["","1","2–3","4–9","10–29","30+"][i]}</span>`).join("")}<span style="margin-left:auto">${by.size} ${esc(t("m_countries"))} · ${L.length} ${esc(t("shirts"))}</span></div>
-    <div class="tip" id="tip" hidden></div></div>
+    <div class="tip" id="tip" hidden></div></div>${cfpanel}</div>
    <div class="side">
     <section class="panel"><h2>${esc(t("m_top"))}</h2><div class="rank">${ranked.slice(0,12).map(([k,v],i)=>`<button data-ctry="${esc(mapKey(k))}"><span class="pos">${i+1}</span><span class="nm">${esc(cnameK(k))}</span><span class="ct">${v}</span></button>`).join("")||`<p class="sub">—</p>`}</div></section>
     <section class="panel"><h2>${esc(t("m_cont"))}</h2>${bars(conts,8,tc)}${unm?`<p class="sub" style="margin-top:10px">${esc(t("m_unmapped"))}: ${unm}</p>`:""}</section>
@@ -373,7 +406,7 @@ function viewMap(){
 }
 function filtered(){
   const f=S.filters,q=f.q.trim().toLowerCase();
-  return shirtsFor(S.who).filter(x=>(!f.ctry||mapKey(ckey(x.country))===f.ctry)&&(!f.cont||x.cont===f.cont)&&(!f.style||x.style===f.style)&&(!f.cond||x.cond===f.cond)&&(!f.supp||x.supplier===f.supp)&&(!f.kind||x.kind===f.kind)&&(!q||[x.club,x.country,cname(x.country),x.player,x.season,x.supplier,x.note,x.league].join(" ").toLowerCase().includes(q)));
+  return shirtsFor(S.who).filter(x=>(!f.cf||conifaKey(x)===f.cf)&&(!f.ctry||mapKey(ckey(x.country))===f.ctry)&&(!f.cont||x.cont===f.cont)&&(!f.style||x.style===f.style)&&(!f.cond||x.cond===f.cond)&&(!f.supp||x.supplier===f.supp)&&(!f.kind||x.kind===f.kind)&&(!q||[x.club,x.country,cname(x.country),x.player,x.season,x.supplier,x.note,x.league].join(" ").toLowerCase().includes(q)));
 }
 function sel(id,label,vals,cur,lab=x=>x){return `<select id="${id}" aria-label="${esc(label)}"><option value="">${esc(label)}: ${esc(t("all"))}</option>${vals.map(v=>`<option value="${esc(v)}"${v===cur?" selected":""}>${esc(lab(v))}</option>`).join("")}</select>`}
 function viewColl(){
@@ -389,7 +422,7 @@ function viewColl(){
   `<div class="tools"><input type="search" id="q" placeholder="${esc(t("search"))}" value="${esc(f.q)}">
    ${sel("f_cont",t("f_cont"),uniq(x=>x.cont),f.cont,tc)}${sel("f_kind",t("f_kind"),uniq(x=>x.kind),f.kind,kindLabel)}${sel("f_style",t("f_style"),uniq(x=>x.style),f.style)}${sel("f_cond",t("f_cond"),uniq(x=>x.cond),f.cond)}${sel("f_supp",t("f_supp"),uniq(x=>x.supplier).sort((a,b)=>a.localeCompare(b)),f.supp)}
    <button class="btn" id="mode">${esc(S.mode==="grid"?t("table"):t("grid"))}</button>
-   ${f.ctry?`<span class="chip">${esc(t("f_country"))}: ${esc(cnameK(f.ctry==="826"?"826":f.ctry))}<button id="clearctry" aria-label="✕">✕</button></span>`:""}
+   ${f.cf?`<span class="chip">CONIFA: ${esc(cfName(f.cf))}<button id="clearcf" aria-label="✕">✕</button></span>`:""}${f.ctry?`<span class="chip">${esc(t("f_country"))}: ${esc(cnameK(f.ctry==="826"?"826":f.ctry))}<button id="clearctry" aria-label="✕">✕</button></span>`:""}
    <span class="count">${esc(t("showing",{n:shown.length,t:L.length}))}</span></div>${body}
    ${L.length>shown.length?`<div class="more"><button class="btn" id="more">${esc(t("more"))}</button></div>`:""}`;
 }
@@ -493,12 +526,16 @@ const view=document.getElementById("view");
 view.addEventListener("input",e=>{if(e.target.id==="q"){S.filters.q=e.target.value;S.limit=60;render()}});
 view.addEventListener("change",e=>{
   const id=e.target.id;
-  if(id==="who"){S.who=e.target.value;S.filters={q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:""};S.limit=60;watchCollector(S.who);render()}
+  if(id==="who"){S.who=e.target.value;S.filters={q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:"",cf:""};S.limit=60;watchCollector(S.who);render()}
   else if(id.startsWith("f_")){const k={f_cont:"cont",f_style:"style",f_cond:"cond",f_supp:"supp",f_kind:"kind"}[id];S.filters[k]=e.target.value;S.limit=60;render()}
 });
 view.addEventListener("click",e=>{
   const o=e.target.closest("[data-open]");if(o){openShirt(o.dataset.open);return}
-  const cc=e.target.closest("[data-ctry],path[data-k]");if(cc){S.filters={q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:cc.dataset.ctry||cc.dataset.k};S.limit=60;location.hash="colecao";return}
+  const kindF=S.mapKind==="nat"?"Nazionale":S.mapKind==="club"?"Club":"";
+  const cc=e.target.closest("[data-ctry],path[data-k]");if(cc){S.filters={q:"",cont:"",style:"",cond:"",supp:"",kind:kindF,ctry:cc.dataset.ctry||cc.dataset.k,cf:""};S.limit=60;location.hash="colecao";return}
+  const cfb=e.target.closest("[data-cf]");if(cfb){S.filters={q:"",cont:"",style:"",cond:"",supp:"",kind:kindF,ctry:"",cf:cfb.dataset.cf};S.limit=60;location.hash="colecao";return}
+  const mk=e.target.closest("[data-mk]");if(mk){S.mapKind=mk.dataset.mk;render();return}
+  if(e.target.id==="clearcf"){S.filters.cf="";render();return}
   if(e.target.id==="clearctry"){S.filters.ctry="";render();return}
   const w=e.target.closest("[data-who]");if(w){S.who=w.dataset.who;watchCollector(S.who);location.hash="mapa";if(S.view==="mapa")render();return}
   const sw=e.target.closest(".sw");if(sw){const on=sw.getAttribute("aria-pressed")==="true";const n=view.querySelectorAll('.sw[aria-pressed="true"]').length;if(!on&&n>=3)return;sw.setAttribute("aria-pressed",String(!on));return}
