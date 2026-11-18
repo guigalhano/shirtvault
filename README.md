@@ -2,7 +2,7 @@
 
 Mapa-múndi e painel da coleção de camisas de futebol de Daniele Mureddu (663 camisas, 156 países).
 
-Site: https://garrinchashirts.com
+Site: https://garrinchashirts.com/colecao (embutido) · https://guigalhano.github.io/shirtvault/
 
 ## O que tem
 - **Mapa**: cada país pintado pela quantidade de camisas; clique para ver as camisas do país.
@@ -23,4 +23,10 @@ python3 -m http.server 8000
 Abra http://localhost:8000.
 
 ## Publicação
-GitHub Pages, branch `main`, pasta raiz. O arquivo `CNAME` aponta o domínio `garrinchashirts.com`.
+GitHub Pages, branch `main`, pasta raiz, em https://guigalhano.github.io/shirtvault/.
+
+Para mostrar dentro do site principal (garrinchashirts.com/colecao), crie uma página no construtor do site e embuta:
+
+```html
+<iframe src="https://guigalhano.github.io/shirtvault/" title="Coleção de camisas" style="width:100%;height:1400px;border:0" loading="lazy"></iframe>
+```
