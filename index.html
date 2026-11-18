@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Mapa e painel de coleções de camisas de futebol de cinco colecionadores.">
+<meta name="description" content="Mapa e painel de coleções de camisas de futebol de seis colecionadores.">
 <title>ShirtVault</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
@@ -320,7 +320,7 @@ function hyVersion(sh){if(sh.version)return sh.version;if(sh.cond==="Issued"||sh
 function hyFeatures(sh){if(sh.features)return sh.features;const f=[];if(sh.cond==="Match Worn")f.push("Match Worn");if(/sign/i.test(sh.note||"")||/sign/i.test(sh.coa||""))f.push("Autograph");return f}
 
 /* ---------- state ---------- */
-const STATIC=[{id:"demo",name:"Daniele Mureddu",file:"data/daniele.json",country:"Italia"},{id:"roberto",name:"Roberto Baigorria",file:"data/roberto.json",country:"Chile"},{id:"anderson",name:"Anderson Borges",file:"data/anderson.json",country:"Brasil"},{id:"junior",name:"Junior Mendes",file:"data/junior.json",country:"Brasil"},{id:"vitor",name:"Vitor Ribeiro",file:"data/vitor.json",country:"Brasil"}];
+const STATIC=[{id:"demo",name:"Daniele Mureddu",file:"data/daniele.json",country:"Italia"},{id:"roberto",name:"Roberto Baigorria",file:"data/roberto.json",country:"Chile"},{id:"anderson",name:"Anderson Borges",file:"data/anderson.json",country:"Brasil"},{id:"junior",name:"Junior Mendes",file:"data/junior.json",country:"Brasil"},{id:"vitor",name:"Vitor Ribeiro",file:"data/vitor.json",country:"Brasil"},{id:"mauricio",name:"Mauricio Franco",file:"data/mauricio.json",country:"Brasil"}];
 const S={demo:[],st:{},collectors:{},mine:[],me:null,db:null,user:null,view:"painel",who:"demo",filters:{q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:"",cf:""},mode:"grid",mapKind:"all",mapMode:"countries",cfZoom:"world",limit:60,dbState:"loading",shirtsOf:{}};
 try{S.mode=localStorage.getItem("sv_mode")||"grid"}catch(e){}
 
@@ -410,7 +410,7 @@ function leagueOf(x,code){
   return L.cats[String(x.league||"").toLowerCase().trim()]||"none";
 }
 function leagueName(k,code){const L=LEAGUES[code];if(L&&L.names[k])return L.names[k];return t({rsel:"lg_rsel",nat:"lg_nat",low:"lg_lower",state:"lg_state",regional:"lg_regional"}[k]||"lg_none")}
-function regionOf(x,code){if(!REG||!REG[code])return "";if(x.kind==="Nazionale"){const r=nfReg(x);return r&&r[0]===code?r[1]:""}if(code==="826"){const n={SCO:"Scotland",WAL:"Wales",NIR:"Northern Ireland"}[ckey(x.country)];if(n)return n}return REG[code].clubs[normClub(x.club)]||""}
+function regionOf(x,code){if(!REG||!REG[code])return "";if(x.reg&&x.kind!=="Nazionale")return x.reg;if(x.kind==="Nazionale"){const r=nfReg(x);return r&&r[0]===code?r[1]:""}if(code==="826"){const n={SCO:"Scotland",WAL:"Wales",NIR:"Northern Ireland"}[ckey(x.country)];if(n)return n}return REG[code].clubs[normClub(x.club)]||""}
 function cardsHtml(shown){return `<div class="cards">${shown.map(x=>`<button class="card" data-open="${esc(x.id)}"><span class="art">${jersey(x)}</span><span class="club">${esc(x.club)}</span><span class="meta">${esc([x.season,x.style,x.supplier].filter(Boolean).join(" · "))}</span><span class="tags">${x.loc?`<span class="pill loc">${esc(x.loc)}</span>`:""}${x.size?`<span class="pill">${esc(x.size)}${x.meas?" · "+esc(x.meas)+" cm":""}</span>`:""}${x.cond?`<span class="pill${x.cond==="Match Worn"?" red":""}">${esc(x.cond)}</span>`:""}${x.player||x.num?`<span class="pill">${esc(x.num?"#"+x.num+" ":"")}${esc(x.player||"")}</span>`:""}</span>${x.note&&(x.loc||x.meas)?`<span class="cnote">${esc(x.note)}</span>`:""}</button>`).join("")}</div>`}
 function regionGeo(code){
   if(RGEO[code]||!REG||!REG[code]||!window.topojson||!window.d3)return RGEO[code];
