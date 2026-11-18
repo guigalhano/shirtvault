@@ -31,3 +31,8 @@ Para mostrar dentro do site principal (garrinchashirts.com/colecao), crie uma p�
 ```html
 <iframe src="https://guigalhano.github.io/shirtvault/" title="Coleção de camisas" style="width:100%;height:1400px;border:0" loading="lazy"></iframe>
 ```
+
+## Páginas por país (Itália, Brasil, Argentina, Chile)
+Clique no país no mapa-múndi para ver o mapa por região e o filtro por liga.
+- `data/regions.json`: contornos das regiões ([Natural Earth](https://www.naturalearthdata.com/), domínio público) e a tabela time → região. Times que não estão na tabela aparecem como "região não identificada".
+- As ligas vêm da coluna Serie (Daniele) ou da categoria da planilha (Roberto). Categorias genéricas, como "Italiano ascenso" e "Ascenso arg regional", ficam como divisões inferiores ou ligas regionais.
