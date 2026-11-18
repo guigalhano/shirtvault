@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Mapa e painel de coleções de camisas de futebol: Daniele Mureddu e Roberto Baigorria.">
+<meta name="description" content="Mapa e painel de coleções de camisas de futebol: Daniele Mureddu, Roberto Baigorria e Anderson Borges.">
 <title>ShirtVault</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
@@ -160,6 +160,10 @@ dialog::backdrop{background:rgb(10 12 25/.55)}
 .cfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .cfcard{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;cursor:pointer;text-align:left}
 .cfcard:hover{border-color:var(--accent)}
+.cfgrid.many{display:flex;flex-wrap:wrap;gap:6px}
+.cfgrid.many .cfcard{padding:4px 6px 4px 10px;border-radius:999px;align-items:center;font-size:13px}
+.cfgrid.many .cfcard .cfn{font-weight:500}
+.cfgrid.many .cfcard .cfc{font-family:var(--body);font-size:12px;font-weight:700;background:var(--accent-soft);border-radius:999px;padding:0 7px;min-width:1.6em;text-align:center}
 .cfcard .cfn{font-weight:600;min-width:0;overflow-wrap:anywhere}
 .cfcard .cfc{font-family:var(--display);font-size:24px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
 .mapbox path.c.deep{stroke:var(--ink);stroke-width:.9}
@@ -210,7 +214,7 @@ dialog::backdrop{background:rgb(10 12 25/.55)}
 <script>
 /* ---------- i18n ---------- */
 const I18N={
-pt:{back:"← Mapa",c_regions:"Regiões",c_leagues:"Liga",c_unk:"Região não identificada",c_allL:"Todas",lg_nat:"Seleção",lg_lower:"Divisões inferiores",lg_state:"Estaduais",lg_regional:"Ligas regionais",lg_none:"Sem liga",deep_hint:"Países com contorno escuro (Itália, Brasil, Argentina, Chile, Reino Unido e Espanha) têm página com mapa por região e filtro por liga.",c_clear:"Limpar região",all_coll:"Todos os colecionadores",collector:"Colecionador",k_all:"Todos",k_nat:"Seleções nacionais",k_clubs2:"Times",cf_t:"CONIFA",cf_p:"Seleções e territórios fora da FIFA, membros da CONIFA. Clique para ver as camisas.",cf_none:"Nenhuma camisa CONIFA com este filtro.",nav_map:"Mapa",map_t:"Mapa da coleção",map_p:"Cada país pintado pela quantidade de camisas. Clique para ver as camisas daquele país.",m_countries:"países com camisa",m_top:"Países com mais camisas",m_cont:"Continentes",m_unmapped:"Sem país no mapa",m_none:"nenhuma",m_few:"menos",m_many:"mais",f_country:"País",nav_dash:"Painel",nav_coll:"Coleção",nav_explore:"Explorar",nav_new:"Nova camisa",lang:"Idioma",
+pt:{back:"← Mapa",c_regions:"Regiões",c_leagues:"Liga",c_unk:"Região não identificada",c_allL:"Todas",lg_nat:"Seleção",lg_lower:"Divisões inferiores",lg_state:"Estaduais",lg_regional:"Ligas regionais",lg_none:"Sem liga",deep_hint:"Países com contorno escuro (Itália, Brasil, Argentina, Chile, Reino Unido e Espanha) têm página com mapa por região e filtro por liga.",c_clear:"Limpar região",all_coll:"Todos os colecionadores",collector:"Colecionador",k_all:"Todos",k_nat:"Seleções nacionais",k_clubs2:"Times",cf_t:"CONIFA",cf_p:"Seleções e territórios fora da FIFA: CONIFA, NF-Board, WUFA, Island Games e estados soberanos não filiados. Clique para ver as camisas.",cf_none:"Nenhuma camisa CONIFA com este filtro.",nav_map:"Mapa",map_t:"Mapa da coleção",map_p:"Cada país pintado pela quantidade de camisas. Clique para ver as camisas daquele país.",m_countries:"países com camisa",m_top:"Países com mais camisas",m_cont:"Continentes",m_unmapped:"Sem país no mapa",m_none:"nenhuma",m_few:"menos",m_many:"mais",f_country:"País",nav_dash:"Painel",nav_coll:"Coleção",nav_explore:"Explorar",nav_new:"Nova camisa",lang:"Idioma",
  collector_of:"Coleção de",demo:"Importada de planilha",yours:"Sua coleção",
  k_total:"Camisas",k_countries:"Países",k_clubs:"Times",k_suppliers:"Fornecedores",k_mw:"Match worn",k_coa:"Com certificado",
  c_cont:"Por continente",c_style:"Por estilo",c_supp:"Top fornecedores",c_clubs:"Top times",c_decade:"Por década da temporada",c_size:"Por tamanho",c_cond:"Por condição",c_place:"Onde comprou",
@@ -224,11 +228,11 @@ pt:{back:"← Mapa",c_regions:"Regiões",c_leagues:"Liga",c_unk:"Região não id
  new_t:"Nova camisa",new_p:"Campos no padrão do Hyfe, para facilitar publicar lá depois.",
  lg_main:"Camisa",lg_attr:"Atributos",lg_priv:"Compra e estado",lg_profile:"Seu perfil",nick:"Apelido",
  save:"Salvar camisa",saved:"Camisa salva na sua coleção",need_club:"Informe o time",
- nodb:"O cadastro de novas coleções chega em breve. Por enquanto, explore as coleções de Daniele Mureddu e Roberto Baigorria.",
+ nodb:"O cadastro de novas coleções chega em breve. Por enquanto, explore as coleções publicadas no site.",
  loading:"Carregando…",slow:"Os dados ainda não responderam. Verifique a conexão.",nores:"Nenhuma camisa com esses filtros.",
  empty_you:"Você ainda não cadastrou camisas.",add_first:"Cadastrar a primeira",
  cont:{"Europa":"Europa","Sud America":"América do Sul","Africa":"África","Asia":"Ásia","Centro America":"América Central","Oceania":"Oceania","America del Nord":"América do Norte"}},
-en:{back:"← Map",c_regions:"Regions",c_leagues:"League",c_unk:"Region not identified",c_allL:"All",lg_nat:"National team",lg_lower:"Lower divisions",lg_state:"State leagues",lg_regional:"Regional leagues",lg_none:"No league",deep_hint:"Countries with a dark outline (Italy, Brazil, Argentina, Chile, United Kingdom and Spain) have a page with a region map and a league filter.",c_clear:"Clear region",all_coll:"All collectors",collector:"Collector",k_all:"All",k_nat:"National teams",k_clubs2:"Clubs",cf_t:"CONIFA",cf_p:"Teams and territories outside FIFA that belong to CONIFA. Click to see the shirts.",cf_none:"No CONIFA shirts with this filter.",nav_map:"Map",map_t:"Collection map",map_p:"Each country shaded by how many shirts it has. Click one to see its shirts.",m_countries:"countries with shirts",m_top:"Countries with the most shirts",m_cont:"Continents",m_unmapped:"Not on the map",m_none:"none",m_few:"fewer",m_many:"more",f_country:"Country",nav_dash:"Dashboard",nav_coll:"Collection",nav_explore:"Explore",nav_new:"New shirt",lang:"Language",
+en:{back:"← Map",c_regions:"Regions",c_leagues:"League",c_unk:"Region not identified",c_allL:"All",lg_nat:"National team",lg_lower:"Lower divisions",lg_state:"State leagues",lg_regional:"Regional leagues",lg_none:"No league",deep_hint:"Countries with a dark outline (Italy, Brazil, Argentina, Chile, United Kingdom and Spain) have a page with a region map and a league filter.",c_clear:"Clear region",all_coll:"All collectors",collector:"Collector",k_all:"All",k_nat:"National teams",k_clubs2:"Clubs",cf_t:"CONIFA",cf_p:"Teams and territories outside FIFA: CONIFA, NF-Board, WUFA, Island Games and unaffiliated sovereign states. Click to see the shirts.",cf_none:"No CONIFA shirts with this filter.",nav_map:"Map",map_t:"Collection map",map_p:"Each country shaded by how many shirts it has. Click one to see its shirts.",m_countries:"countries with shirts",m_top:"Countries with the most shirts",m_cont:"Continents",m_unmapped:"Not on the map",m_none:"none",m_few:"fewer",m_many:"more",f_country:"Country",nav_dash:"Dashboard",nav_coll:"Collection",nav_explore:"Explore",nav_new:"New shirt",lang:"Language",
  collector_of:"Collection of",demo:"Imported from spreadsheet",yours:"Your collection",
  k_total:"Shirts",k_countries:"Countries",k_clubs:"Teams",k_suppliers:"Suppliers",k_mw:"Match worn",k_coa:"With certificate",
  c_cont:"By continent",c_style:"By style",c_supp:"Top suppliers",c_clubs:"Top teams",c_decade:"By season decade",c_size:"By size",c_cond:"By condition",c_place:"Where bought",
@@ -242,11 +246,11 @@ en:{back:"← Map",c_regions:"Regions",c_leagues:"League",c_unk:"Region not iden
  new_t:"New shirt",new_p:"Fields follow Hyfe's format, so publishing there later is quick.",
  lg_main:"Shirt",lg_attr:"Attributes",lg_priv:"Purchase & condition",lg_profile:"Your profile",nick:"Nickname",
  save:"Save shirt",saved:"Shirt saved to your collection",need_club:"Enter the team",
- nodb:"Adding your own collection is coming soon. For now, explore the collections of Daniele Mureddu and Roberto Baigorria.",
+ nodb:"Adding your own collection is coming soon. For now, explore the collections published on the site.",
  loading:"Loading…",slow:"The data hasn't answered yet. Check your connection.",nores:"No shirts match these filters.",
  empty_you:"You haven't added any shirts yet.",add_first:"Add the first one",
  cont:{"Europa":"Europe","Sud America":"South America","Africa":"Africa","Asia":"Asia","Centro America":"Central America","Oceania":"Oceania","America del Nord":"North America"}},
-es:{back:"← Mapa",c_regions:"Regiones",c_leagues:"Liga",c_unk:"Región no identificada",c_allL:"Todas",lg_nat:"Selección",lg_lower:"Divisiones inferiores",lg_state:"Estaduales",lg_regional:"Ligas regionales",lg_none:"Sin liga",deep_hint:"Los países con contorno oscuro (Italia, Brasil, Argentina, Chile, Reino Unido y España) tienen página con mapa por región y filtro por liga.",c_clear:"Quitar región",all_coll:"Todos los coleccionistas",collector:"Coleccionista",k_all:"Todos",k_nat:"Selecciones nacionales",k_clubs2:"Equipos",cf_t:"CONIFA",cf_p:"Selecciones y territorios fuera de la FIFA, miembros de la CONIFA. Haz clic para ver las camisetas.",cf_none:"Ninguna camiseta CONIFA con este filtro.",nav_map:"Mapa",map_t:"Mapa de la colección",map_p:"Cada país coloreado según la cantidad de camisetas. Haz clic para ver las camisetas de ese país.",m_countries:"países con camiseta",m_top:"Países con más camisetas",m_cont:"Continentes",m_unmapped:"Sin país en el mapa",m_none:"ninguna",m_few:"menos",m_many:"más",f_country:"País",nav_dash:"Panel",nav_coll:"Colección",nav_explore:"Explorar",nav_new:"Nueva camiseta",lang:"Idioma",
+es:{back:"← Mapa",c_regions:"Regiones",c_leagues:"Liga",c_unk:"Región no identificada",c_allL:"Todas",lg_nat:"Selección",lg_lower:"Divisiones inferiores",lg_state:"Estaduales",lg_regional:"Ligas regionales",lg_none:"Sin liga",deep_hint:"Los países con contorno oscuro (Italia, Brasil, Argentina, Chile, Reino Unido y España) tienen página con mapa por región y filtro por liga.",c_clear:"Quitar región",all_coll:"Todos los coleccionistas",collector:"Coleccionista",k_all:"Todos",k_nat:"Selecciones nacionales",k_clubs2:"Equipos",cf_t:"CONIFA",cf_p:"Selecciones y territorios fuera de la FIFA: CONIFA, NF-Board, WUFA, Island Games y estados soberanos no afiliados. Haz clic para ver las camisetas.",cf_none:"Ninguna camiseta CONIFA con este filtro.",nav_map:"Mapa",map_t:"Mapa de la colección",map_p:"Cada país coloreado según la cantidad de camisetas. Haz clic para ver las camisetas de ese país.",m_countries:"países con camiseta",m_top:"Países con más camisetas",m_cont:"Continentes",m_unmapped:"Sin país en el mapa",m_none:"ninguna",m_few:"menos",m_many:"más",f_country:"País",nav_dash:"Panel",nav_coll:"Colección",nav_explore:"Explorar",nav_new:"Nueva camiseta",lang:"Idioma",
  collector_of:"Colección de",demo:"Importada de planilla",yours:"Tu colección",
  k_total:"Camisetas",k_countries:"Países",k_clubs:"Equipos",k_suppliers:"Marcas",k_mw:"Match worn",k_coa:"Con certificado",
  c_cont:"Por continente",c_style:"Por estilo",c_supp:"Marcas principales",c_clubs:"Equipos principales",c_decade:"Por década de la temporada",c_size:"Por talla",c_cond:"Por condición",c_place:"Dónde se compró",
@@ -260,11 +264,11 @@ es:{back:"← Mapa",c_regions:"Regiones",c_leagues:"Liga",c_unk:"Región no iden
  new_t:"Nueva camiseta",new_p:"Campos con el formato de Hyfe, para publicar allí fácilmente.",
  lg_main:"Camiseta",lg_attr:"Atributos",lg_priv:"Compra y estado",lg_profile:"Tu perfil",nick:"Apodo",
  save:"Guardar camiseta",saved:"Camiseta guardada en tu colección",need_club:"Indica el equipo",
- nodb:"El registro de nuevas colecciones llegará pronto. Por ahora, explora las colecciones de Daniele Mureddu y Roberto Baigorria.",
+ nodb:"El registro de nuevas colecciones llegará pronto. Por ahora, explora las colecciones publicadas en el sitio.",
  loading:"Cargando…",slow:"Los datos aún no responden. Revisa tu conexión.",nores:"Ninguna camiseta coincide con los filtros.",
  empty_you:"Aún no registraste camisetas.",add_first:"Registrar la primera",
  cont:{"Europa":"Europa","Sud America":"Sudamérica","Africa":"África","Asia":"Asia","Centro America":"Centroamérica","Oceania":"Oceanía","America del Nord":"Norteamérica"}},
-it:{back:"← Mappa",c_regions:"Regioni",c_leagues:"Campionato",c_unk:"Regione non identificata",c_allL:"Tutti",lg_nat:"Nazionale",lg_lower:"Categorie inferiori",lg_state:"Campionati statali",lg_regional:"Leghe regionali",lg_none:"Senza campionato",deep_hint:"I paesi con il contorno scuro (Italia, Brasile, Argentina, Cile, Regno Unito e Spagna) hanno una pagina con mappa per regione e filtro per campionato.",c_clear:"Togli regione",all_coll:"Tutti i collezionisti",collector:"Collezionista",k_all:"Tutte",k_nat:"Nazionali",k_clubs2:"Club",cf_t:"CONIFA",cf_p:"Nazionali e territori fuori dalla FIFA, membri della CONIFA. Clicca per vedere le maglie.",cf_none:"Nessuna maglia CONIFA con questo filtro.",nav_map:"Mappa",map_t:"Mappa della collezione",map_p:"Ogni nazione colorata in base al numero di maglie. Clicca per vedere le maglie di quella nazione.",m_countries:"nazioni con maglie",m_top:"Nazioni con più maglie",m_cont:"Continenti",m_unmapped:"Fuori dalla mappa",m_none:"nessuna",m_few:"meno",m_many:"più",f_country:"Nazione",nav_dash:"Dashboard",nav_coll:"Collezione",nav_explore:"Esplora",nav_new:"Nuova maglia",lang:"Lingua",
+it:{back:"← Mappa",c_regions:"Regioni",c_leagues:"Campionato",c_unk:"Regione non identificata",c_allL:"Tutti",lg_nat:"Nazionale",lg_lower:"Categorie inferiori",lg_state:"Campionati statali",lg_regional:"Leghe regionali",lg_none:"Senza campionato",deep_hint:"I paesi con il contorno scuro (Italia, Brasile, Argentina, Cile, Regno Unito e Spagna) hanno una pagina con mappa per regione e filtro per campionato.",c_clear:"Togli regione",all_coll:"Tutti i collezionisti",collector:"Collezionista",k_all:"Tutte",k_nat:"Nazionali",k_clubs2:"Club",cf_t:"CONIFA",cf_p:"Nazionali e territori fuori dalla FIFA: CONIFA, NF-Board, WUFA, Island Games e stati sovrani non affiliati. Clicca per vedere le maglie.",cf_none:"Nessuna maglia CONIFA con questo filtro.",nav_map:"Mappa",map_t:"Mappa della collezione",map_p:"Ogni nazione colorata in base al numero di maglie. Clicca per vedere le maglie di quella nazione.",m_countries:"nazioni con maglie",m_top:"Nazioni con più maglie",m_cont:"Continenti",m_unmapped:"Fuori dalla mappa",m_none:"nessuna",m_few:"meno",m_many:"più",f_country:"Nazione",nav_dash:"Dashboard",nav_coll:"Collezione",nav_explore:"Esplora",nav_new:"Nuova maglia",lang:"Lingua",
  collector_of:"Collezione di",demo:"Importata da foglio",yours:"La tua collezione",
  k_total:"Maglie",k_countries:"Nazioni",k_clubs:"Squadre",k_suppliers:"Sponsor tecnici",k_mw:"Match worn",k_coa:"Con certificato",
  c_cont:"Per continente",c_style:"Per versione",c_supp:"Top sponsor tecnici",c_clubs:"Top squadre",c_decade:"Per decennio della stagione",c_size:"Per taglia",c_cond:"Per condizione",c_place:"Luogo d'acquisto",
@@ -278,7 +282,7 @@ it:{back:"← Mappa",c_regions:"Regioni",c_leagues:"Campionato",c_unk:"Regione n
  new_t:"Nuova maglia",new_p:"Campi nel formato di Hyfe, così pubblicarla lì è più rapido.",
  lg_main:"Maglia",lg_attr:"Attributi",lg_priv:"Acquisto e condizione",lg_profile:"Il tuo profilo",nick:"Nickname",
  save:"Salva maglia",saved:"Maglia salvata nella tua collezione",need_club:"Inserisci la squadra",
- nodb:"La registrazione di nuove collezioni arriverà presto. Per ora esplora le collezioni di Daniele Mureddu e Roberto Baigorria.",
+ nodb:"La registrazione di nuove collezioni arriverà presto. Per ora esplora le collezioni pubblicate sul sito.",
  loading:"Caricamento…",slow:"I dati non rispondono ancora. Controlla la connessione.",nores:"Nessuna maglia con questi filtri.",
  empty_you:"Non hai ancora inserito maglie.",add_first:"Inserisci la prima",
  cont:{}}
@@ -312,7 +316,7 @@ function hyVersion(sh){if(sh.version)return sh.version;if(sh.cond==="Issued"||sh
 function hyFeatures(sh){if(sh.features)return sh.features;const f=[];if(sh.cond==="Match Worn")f.push("Match Worn");if(/sign/i.test(sh.note||"")||/sign/i.test(sh.coa||""))f.push("Autograph");return f}
 
 /* ---------- state ---------- */
-const STATIC=[{id:"demo",name:"Daniele Mureddu",file:"data/daniele.json",country:"Italia"},{id:"roberto",name:"Roberto Baigorria",file:"data/roberto.json",country:"Chile"}];
+const STATIC=[{id:"demo",name:"Daniele Mureddu",file:"data/daniele.json",country:"Italia"},{id:"roberto",name:"Roberto Baigorria",file:"data/roberto.json",country:"Chile"},{id:"anderson",name:"Anderson Borges",file:"data/anderson.json",country:"Brasil"}];
 const S={demo:[],st:{},collectors:{},mine:[],me:null,db:null,user:null,view:"painel",who:"demo",filters:{q:"",cont:"",style:"",cond:"",supp:"",kind:"",ctry:"",cf:""},mode:"grid",mapKind:"all",limit:60,dbState:"loading",shirtsOf:{}};
 try{S.mode=localStorage.getItem("sv_mode")||"grid"}catch(e){}
 
@@ -445,6 +449,7 @@ const CONIFA={
  chagos:{n:{pt:"Ilhas Chagos",en:"Chagos Islands",es:"Islas Chagos",it:"Isole Chagos"},a:["chagos"]}
 };
 function conifaKey(x){
+  if(x.nf)return x.nf;
   if(x._cf!==undefined)return x._cf;
   let k="";
   const hay=normC([x.country==="CONIFA"?x.club:"",x.league,x.kind==="Nazionale"||x.country==="CONIFA"?x.club:""].join(" | "));
@@ -466,7 +471,7 @@ function viewMap(){
   S._mapInfo={by,sub};
   const svg=GEO?`<svg viewBox="0 0 960 500" role="img" aria-label="${esc(t("map_t"))}"><rect class="sea" x="0" y="0" width="960" height="500" rx="8"/>${GEO.map(g=>{const v=by.get(g.k)||0;return `<path class="c${v?" l"+lvl(v):""}${LEAGUES[g.k]?" deep":""}" d="${g.d}"${v?` data-k="${esc(g.k)}"`:""}></path>`}).join("")}</svg>`:`<div class="empty">${esc(t("loading"))}</div>`;
   const seg=[["all","k_all"],["nat","k_nat"],["club","k_clubs2"]].map(([v,l])=>`<button class="segb" data-mk="${v}" aria-pressed="${S.mapKind===v}">${esc(t(l))}</button>`).join("");
-  const cfpanel=`<section class="panel cfp"><h2>${esc(t("cf_t"))}</h2><p class="sub" style="margin:-6px 0 12px">${esc(t("cf_p"))}</p>${cf.length?`<div class="cfgrid">${cf.map(([k,v])=>`<button class="cfcard" data-cf="${esc(k)}"><span class="cfn">${esc(cfName(k))}</span><span class="cfc">${v}</span></button>`).join("")}</div>`:`<p class="sub">${esc(t("cf_none"))}</p>`}</section>`;
+  const cfpanel=`<section class="panel cfp"><h2>${esc(t("cf_t"))}</h2><p class="sub" style="margin:-6px 0 12px">${esc(t("cf_p"))}</p>${cf.length?`<div class="cfgrid${cf.length>16?" many":""}">${cf.map(([k,v])=>`<button class="cfcard" data-cf="${esc(k)}"><span class="cfn">${esc(cfName(k))}</span><span class="cfc">${v}</span></button>`).join("")}</div>`:`<p class="sub">${esc(t("cf_none"))}</p>`}</section>`;
   return ownerHead(S.who,t("map_t"))+
   `<div class="seg" role="group" aria-label="${esc(t("f_kind"))}">${seg}</div>
   <div class="mapgrid"><div class="mapleft"><div class="mapbox" id="mapbox">${svg}
