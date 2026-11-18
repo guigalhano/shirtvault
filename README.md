@@ -35,5 +35,6 @@ Para mostrar dentro do site principal (garrinchashirts.com/colecao), crie uma p�
 
 ## Páginas por país (Itália, Brasil, Argentina, Chile, Reino Unido, Espanha)
 Clique no país no mapa-múndi para ver o mapa por região e o filtro por liga.
+- `data/conifa_points.json`: posição (longitude, latitude) de cada seleção não-FIFA no Mapa CONIFA.
 - `data/regions.json`: contornos das regiões ([Natural Earth](https://www.naturalearthdata.com/), domínio público) e a tabela time → região. Times que não estão na tabela aparecem como "região não identificada".
 - As ligas vêm da coluna Serie (Daniele) ou da categoria da planilha (Roberto). Categorias genéricas, como "Italiano ascenso" e "Ascenso arg regional", ficam como divisões inferiores ou ligas regionais.
