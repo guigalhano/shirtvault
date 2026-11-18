@@ -1,6 +1,6 @@
 # ShirtVault
 
-Mapa-múndi e painel de coleções de camisas de futebol: Daniele Mureddu (663 camisas), Roberto Baigorria (5.931 camisas) e Anderson Borges (163 seleções não-FIFA e regionais).
+Mapa-múndi e painel de coleções de camisas de futebol: Daniele Mureddu (663), Roberto Baigorria (5.931), Anderson Borges (163 seleções não-FIFA e regionais), Junior Mendes (467) e Vitor Ribeiro (524).
 
 Site: https://garrinchashirts.com/colecao (embutido) · https://guigalhano.github.io/shirtvault/
 
@@ -15,6 +15,8 @@ Site: https://garrinchashirts.com/colecao (embutido) · https://guigalhano.githu
 - `data/daniele.json`: coleção de Daniele Mureddu (663 camisas), da planilha `Collezione_Maglie_2026_Stats.xlsx`.
 - `data/roberto.json`: coleção de Roberto Baigorria (5.931 camisas), da planilha `colección camis (Autoguardado).xlsx`. O país vem da coluna "País", que mistura países e ligas.
 - `data/anderson.json`: coleção de Anderson Borges, da planilha `JERSEYS_gui.xlsx` (células verdes = camisas que ele tem; o resto é procura e ficou de fora). Cada seleção foi associada ao país onde fica, para aparecer no mapa.
+- `data/junior.json`: coleção de Junior Mendes (lista CSV com local, ano, modelo, tamanho, medidas e detalhes). O país de cada time foi definido na própria lista.
+- `data/vitor.json`: coleção de Vitor Ribeiro, da planilha `Camisas.xlsx` (aba Plan2). A liga dos times argentinos vem da aba Plan1.
 - `data/countries.json`: nomes dos países em 4 idiomas e códigos ISO.
 - `data/world.json`: geometria do mapa ([world-atlas](https://github.com/topojson/world-atlas), Natural Earth, domínio público).
 
